@@ -1,0 +1,203 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="Information about the processing of personal data."
+>
+  <article class="legal">
+    <h1>Privacy Policy</h1>
+
+    <h2>1. Data Controller</h2>
+    <p>
+      Your Name<br />
+      Your Street 1<br />
+      12345 Your City<br />
+      Your Country<br />
+      Email: <a href="mailto:your@email.com">your@email.com</a>
+    </p>
+
+    <h2>2. General Information</h2>
+    <p>
+      We process personal data only to the extent required to provide a
+      functional website and our content and services.
+    </p>
+    <p>
+      Unless another storage period is stated in this policy, data will remain
+      stored until the purpose for processing no longer applies, unless legal
+      retention obligations require longer storage.
+    </p>
+
+    <h2>3. Hosting and Server Log Files</h2>
+    <p>
+      When this website is accessed, our hosting provider processes technically
+      required access data, in particular IP address, date and time, requested
+      URL/file, referrer URL, browser type/version, and operating system.
+    </p>
+    <p>
+      This processing is required to provide the website and ensure security and
+      stability. Legal basis: Art. 6(1)(f) GDPR. Our legitimate interest is the
+      secure and reliable operation of this website.
+    </p>
+    <p>
+      Recipient is our technical hosting provider (processor under Art. 28
+      GDPR). Log files are generally stored only for a limited time and then
+      deleted, unless longer retention is necessary to investigate security
+      incidents.
+    </p>
+
+    <h2>4. Contact Form (Web3Forms)</h2>
+    <p>
+      If you use the contact form, the data you enter (name, email, message, and
+      optional content details) is processed to handle your request.
+    </p>
+    <p>
+      The form is provided through Web3Forms. Submitted data is transmitted to
+      Web3Forms and forwarded to the configured recipient email address.
+    </p>
+    <p>
+      Legal basis: Art. 6(1)(b) GDPR (handling a request) and, where consent is
+      given in the form, Art. 6(1)(a) GDPR. Consent can be revoked at any time
+      with effect for the future.
+    </p>
+    <p>
+      Recipients are Web3Forms and technical service providers used by
+      Web3Forms. Data may be transferred to third countries (including outside
+      the EU/EEA). Where required, transfers are based on legal safeguards such
+      as adequacy decisions or standard contractual clauses.
+    </p>
+    <p>
+      More information:
+      <a
+        href="https://web3forms.com/privacy"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        https://web3forms.com/privacy
+      </a>
+    </p>
+
+    <h2>5. Local Icon Files</h2>
+    <p>
+      The social media icons on the homepage are served as local SVG files from
+      our own server.
+    </p>
+    <p>
+      Loading these icons does not cause an additional IP transfer to external
+      icon CDN providers.
+    </p>
+
+    <h2>6. External Platform Links</h2>
+    <p>
+      This website contains links to external platforms (e.g., Spotify, Apple
+      Music, YouTube, Instagram, Facebook, SoundCloud). Simply visiting our
+      website does not transfer data to these platforms. A connection is only
+      established when you click a link.
+    </p>
+
+    <h2>7. Cookies and Similar Technologies</h2>
+    <p>This website does not use marketing or tracking cookies.</p>
+    <h2>8. Analytics (Vercel Analytics)</h2>
+    <p>
+      We use Vercel Analytics to measure website usage in aggregated form. Legal
+      basis: Art. 6(1)(f) GDPR (legitimate interest in operating, analyzing, and
+      improving this website).
+    </p>
+    <p>
+      The processing is carried out by Vercel as the provider of analytics and
+      hosting services.
+    </p>
+    <p>
+      More information:
+      <a
+        href="https://vercel.com/docs/analytics"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        https://vercel.com/docs/analytics
+      </a>
+      {" "}and{" "}
+      <a
+        href="https://vercel.com/legal/privacy-policy"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        https://vercel.com/legal/privacy-policy
+      </a>
+    </p>
+    <p>
+      If consent-based technologies are introduced in the future, appropriate
+      consent will be obtained beforehand according to applicable law.
+    </p>
+
+    <h2>9. Storage Duration</h2>
+    <p>
+      We store personal data only as long as required for the respective purpose
+      or as required by legal retention periods. Afterwards, data is deleted or
+      processing is restricted.
+    </p>
+
+    <h2>10. Obligation to Provide Data</h2>
+    <p>
+      Providing personal data is not legally required. However, without the
+      fields marked as required in the contact form, your request cannot be
+      processed.
+    </p>
+
+    <h2>11. No Automated Decision-Making</h2>
+    <p>
+      Automated decision-making, including profiling under Art. 22 GDPR, does
+      not take place.
+    </p>
+
+    <h2>12. Your Rights</h2>
+    <p>
+      You have the statutory rights to access (Art. 15 GDPR), rectification
+      (Art. 16 GDPR), erasure (Art. 17 GDPR), restriction of processing (Art. 18
+      GDPR), data portability (Art. 20 GDPR), and objection (Art. 21 GDPR).
+    </p>
+    <p>
+      If processing is based on consent, you can revoke your consent at any time
+      with effect for the future (Art. 7(3) GDPR).
+    </p>
+    <p>
+      You also have the right to lodge a complaint with a supervisory authority
+      (Art. 77 GDPR), especially in your place of residence, place of work, or
+      place of the alleged infringement.
+    </p>
+
+    <p class="note">Last updated: February 19, 2026</p>
+  </article>
+
+  <style>
+    .legal {
+      max-width: 860px;
+      margin: 0 auto;
+      padding-top: clamp(18px, 3vw, 34px);
+      display: grid;
+      gap: 10px;
+      line-height: 1.65;
+    }
+    .legal h1 {
+      margin: 0 0 8px;
+      font-size: clamp(32px, 5vw, 48px);
+    }
+    .legal h2 {
+      margin: 18px 0 2px;
+      font-size: clamp(20px, 2.6vw, 28px);
+    }
+    .legal p {
+      margin: 0;
+    }
+    .note {
+      opacity: 0.78;
+      font-size: 0.95rem;
+    }
+    @media (max-width: 760px) {
+      .legal {
+        padding-top: clamp(72px, 18vw, 120px);
+      }
+    }
+  </style>
+</BaseLayout>

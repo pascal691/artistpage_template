@@ -1,0 +1,109 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Legal Notice"
+  description="Provider identification and mandatory legal information."
+>
+  <article class="legal">
+    <h1>Legal Notice</h1>
+
+    <h2>Information according to Section 5 DDG</h2>
+    <p>
+      Your Name<br />
+      Sole Proprietor<br />
+      Your Street 1<br />
+      12345 Your City<br />
+      Your Country
+    </p>
+
+    <h2>Authorized Representative</h2>
+    <p>Your Name</p>
+
+    <h2>Contact</h2>
+    <p>
+      Phone: <a href="tel:+000000000000">+00 000 00000000</a><br />
+      Email: <a href="mailto:your@email.com">your@email.com</a>
+    </p>
+
+    <h2>Additional Mandatory Information (if applicable)</h2>
+    <p>
+      Where available or legally required, additional information such as
+      register data, VAT ID, business identification number, supervisory
+      authority, and professional regulations will be published here.
+    </p>
+
+    <h2>Responsible for Editorial Content</h2>
+    <p>
+      Responsible under Section 18(2) MStV:<br />
+      Your Name<br />
+      Your Street 1<br />
+      12345 Your City
+    </p>
+
+    <h2>Consumer Dispute Resolution</h2>
+    <p>
+      We are neither obligated nor willing to participate in dispute resolution
+      proceedings before a consumer arbitration board.
+    </p>
+    <p>
+      Note: The former EU Online Dispute Resolution platform (ODR platform) has
+      been discontinued.
+    </p>
+
+    <h2>Liability for Content</h2>
+    <p>
+      As a service provider, we are responsible for our own content on these
+      pages under general law. However, we are not obligated to monitor
+      transmitted or stored third-party information or investigate circumstances
+      indicating unlawful activity.
+    </p>
+
+    <h2>Liability for Links</h2>
+    <p>
+      Our website contains links to external third-party websites whose content
+      we cannot influence. Therefore, we cannot assume any liability for this
+      external content.
+    </p>
+
+    <h2>Copyright</h2>
+    <p>
+      The content and works created by the site operator on these pages are
+      subject to German copyright law.
+    </p>
+
+    <p class="note">Last updated: February 19, 2026</p>
+  </article>
+
+  <style>
+    .legal {
+      max-width: 860px;
+      margin: 0 auto;
+      padding-top: clamp(18px, 3vw, 34px);
+      display: grid;
+      gap: 10px;
+      line-height: 1.65;
+    }
+    .legal h1 {
+      margin: 0 0 8px;
+      font-size: clamp(32px, 5vw, 48px);
+    }
+    .legal h2 {
+      margin: 18px 0 2px;
+      font-size: clamp(20px, 2.6vw, 28px);
+    }
+    .legal p {
+      margin: 0;
+    }
+    .note {
+      opacity: 0.78;
+      font-size: 0.95rem;
+    }
+    @media (max-width: 760px) {
+      .legal {
+        padding-top: clamp(72px, 18vw, 120px);
+      }
+    }
+  </style>
+</BaseLayout>

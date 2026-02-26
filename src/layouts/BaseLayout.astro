@@ -1,0 +1,415 @@
+---
+import "../styles/global.css";
+import Analytics from "@vercel/analytics/astro";
+
+const {
+  title = "Your Name",
+  description = "Official website of Your Name.",
+  canonical = Astro.url,
+  ogImage = "/og-default.png",
+  backgroundImage = "",
+} = Astro.props;
+
+const siteName = "Your Name";
+
+// canonical as string
+const canonicalUrl = canonical?.toString?.() ?? String(canonical);
+
+// Origin fallback: if Astro.site is missing, use current origin (localhost in dev)
+const siteOrigin =
+  (Astro.site && Astro.site.toString()) || new URL(Astro.url).origin;
+
+// Build OG image URL safely
+const ogImageUrl = new URL(ogImage, siteOrigin).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Robots -->
+    <meta name="robots" content="index,follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta
+      property="og:image"
+      content={new URL(ogImage, new URL(Astro.url).origin)}
+    />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta
+      name="twitter:image"
+      content={new URL(ogImage, new URL(Astro.url).origin)}
+    />
+
+    <!-- Performance: simple, local font stack (no external fonts) -->
+    <style>
+      :root {
+        --app-vh: 100svh;
+        --header-h: 80px;
+        --footer-h: 64px;
+      }
+      body {
+        margin: 0;
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          Segoe UI,
+          Roboto,
+          Helvetica,
+          Arial,
+          "Apple Color Emoji",
+          "Segoe UI Emoji";
+        line-height: 1.5;
+        position: relative;
+        isolation: isolate;
+        min-height: 100vh;
+        overflow-x: hidden;
+        color: rgba(244, 248, 255, 0.95);
+        background: #06080d;
+      }
+      body::before,
+      body::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: -1;
+      }
+      body::before {
+        background-image: var(--page-bg-image);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        transform: scale(1.02);
+        filter: saturate(0.92) contrast(1.05);
+      }
+      body::after {
+        background:
+          linear-gradient(
+            145deg,
+            rgba(4, 8, 16, 0.84) 0%,
+            rgba(5, 11, 20, 0.66) 55%,
+            rgba(5, 11, 20, 0.9) 100%
+          ),
+          radial-gradient(
+            circle at 10% 12%,
+            rgba(90, 177, 255, 0.18) 0%,
+            rgba(90, 177, 255, 0) 45%
+          );
+      }
+      a {
+        color: inherit;
+      }
+      .container {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: clamp(4px, 1vw, 10px) clamp(12px, 2vw, 24px)
+          clamp(14px, 2vw, 24px);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 16px;
+        padding: 0;
+        position: relative;
+      }
+      nav a {
+        text-decoration: none;
+        padding: 8px 10px;
+        border-radius: 10px;
+      }
+      nav a:hover {
+        background: rgba(127, 127, 127, 0.12);
+      }
+      .card {
+        border: 1px solid rgba(127, 127, 127, 0.25);
+        border-radius: 18px;
+        padding: 18px;
+      }
+      .hero {
+        padding: 36px 0 18px;
+        display: grid;
+        gap: 16px;
+      }
+      .btn {
+        display: inline-block;
+        text-decoration: none;
+        padding: 10px 14px;
+        border-radius: 12px;
+        border: 1px solid rgba(127, 127, 127, 0.35);
+      }
+      .btn.primary {
+        background: rgba(127, 127, 127, 0.18);
+      }
+      main {
+        flex: 1;
+      }
+      footer {
+        margin-top: auto;
+        padding: 24px 0 16px;
+        opacity: 0.8;
+        font-size: 14px;
+      }
+      .grid {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: repeat(12, 1fr);
+      }
+      .col-6 {
+        grid-column: span 6;
+      }
+      @media (max-width: 800px) {
+        .col-6 {
+          grid-column: span 12;
+        }
+      }
+      .mobile-nav {
+        display: none;
+        position: relative;
+      }
+      .menu-button {
+        appearance: none;
+        -webkit-appearance: none;
+        width: 44px;
+        height: 44px;
+        border: 1px solid rgba(127, 127, 127, 0.35);
+        border-radius: 12px;
+        background: transparent;
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        gap: 5px;
+        cursor: pointer;
+        padding: 0;
+      }
+      .menu-button span {
+        width: 18px;
+        height: 2px;
+        border-radius: 2px;
+        background: currentColor;
+      }
+      .mobile-panel {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        min-width: 180px;
+        border: 1px solid rgba(164, 206, 255, 0.28);
+        border-radius: 14px;
+        background:
+          linear-gradient(
+            155deg,
+            rgba(6, 18, 39, 0.95) 0%,
+            rgba(14, 33, 61, 0.94) 46%,
+            rgba(23, 26, 47, 0.96) 100%
+          ),
+          radial-gradient(
+            circle at 12% 18%,
+            rgba(84, 180, 255, 0.24) 0%,
+            rgba(84, 180, 255, 0) 46%
+          );
+        backdrop-filter: blur(14px) saturate(1.2);
+        -webkit-backdrop-filter: blur(14px) saturate(1.2);
+        box-shadow:
+          0 18px 34px rgba(0, 0, 0, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        padding: 8px;
+        gap: 4px;
+        z-index: 20;
+      }
+      .mobile-panel[hidden] {
+        display: none !important;
+      }
+      .mobile-panel.is-open {
+        display: grid;
+      }
+      .mobile-panel a {
+        display: block;
+        padding: 10px 12px;
+        border-radius: 10px;
+        text-decoration: none;
+        color: rgba(244, 248, 255, 0.96);
+        background: rgba(255, 255, 255, 0.02);
+      }
+      .mobile-panel a:hover {
+        background: linear-gradient(
+          120deg,
+          rgba(113, 201, 255, 0.22) 0%,
+          rgba(120, 154, 255, 0.2) 100%
+        );
+      }
+      @media (max-width: 760px) {
+        .navlinks {
+          display: none !important;
+        }
+        .mobile-nav {
+          display: block;
+          position: fixed;
+          top: 8px;
+          right: 12px;
+          z-index: 40;
+        }
+      }
+      @media (min-width: 761px) {
+        .mobile-nav {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+
+  <body
+    style={backgroundImage
+      ? `--page-bg-image: url('${backgroundImage}');`
+      : undefined}
+  >
+    <div class="container">
+      <header class="nav">
+        <nav class="navlinks">
+          <a class="pill" href="/">Home</a>
+          <a class="pill" href="/kontakt">Contact</a>
+        </nav>
+        <div class="mobile-nav">
+          <button
+            class="menu-button"
+            type="button"
+            aria-label="Open menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <nav class="mobile-panel" id="mobile-menu" hidden>
+            <a href="/">Home</a>
+            <a href="/kontakt">Contact</a>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <slot />
+      </main>
+
+      <footer>
+        © {new Date().getFullYear()}
+        {siteName} · <a href="/kontakt">Contact</a> · <a href="/datenschutz"
+          >Privacy</a
+        >
+        · <a href="/impressum">Legal Notice</a>
+      </footer>
+    </div>
+
+    <script is:inline>
+      (() => {
+        const headerEl = document.querySelector("header");
+        const footerEl = document.querySelector("footer");
+
+        const setViewportVars = () => {
+          const viewportHeight =
+            window.visualViewport?.height ?? window.innerHeight;
+          document.documentElement.style.setProperty(
+            "--app-vh",
+            `${Math.round(viewportHeight)}px`,
+          );
+
+          if (headerEl instanceof HTMLElement) {
+            const headerHeight = Math.round(
+              headerEl.getBoundingClientRect().height,
+            );
+            document.documentElement.style.setProperty(
+              "--header-h",
+              `${headerHeight}px`,
+            );
+          }
+
+          if (footerEl instanceof HTMLElement) {
+            const footerHeight = Math.round(
+              footerEl.getBoundingClientRect().height,
+            );
+            document.documentElement.style.setProperty(
+              "--footer-h",
+              `${footerHeight}px`,
+            );
+          }
+        };
+
+        setViewportVars();
+        window.addEventListener(
+          "resize",
+          () => {
+            if (window.innerWidth > 760) {
+              setViewportVars();
+            }
+          },
+          { passive: true },
+        );
+        window.addEventListener(
+          "orientationchange",
+          () => {
+            window.setTimeout(setViewportVars, 80);
+          },
+          { passive: true },
+        );
+
+        const mobileNav = document.querySelector(".mobile-nav");
+        if (!mobileNav) return;
+
+        const button = mobileNav.querySelector(".menu-button");
+        const panel = mobileNav.querySelector(".mobile-panel");
+        if (
+          !(button instanceof HTMLButtonElement) ||
+          !(panel instanceof HTMLElement)
+        )
+          return;
+
+        const closeMenu = () => {
+          panel.hidden = true;
+          panel.classList.remove("is-open");
+          button.setAttribute("aria-expanded", "false");
+        };
+
+        button.addEventListener("click", () => {
+          const willOpen = !panel.classList.contains("is-open");
+          panel.hidden = !willOpen;
+          panel.classList.toggle("is-open", willOpen);
+          button.setAttribute("aria-expanded", String(willOpen));
+        });
+
+        document.addEventListener("click", (event) => {
+          if (!mobileNav.contains(event.target)) {
+            closeMenu();
+          }
+        });
+
+        window.addEventListener("resize", () => {
+          if (window.innerWidth > 760) {
+            closeMenu();
+          }
+        });
+      })();
+    </script>
+    <Analytics />
+  </body>
+</html>
